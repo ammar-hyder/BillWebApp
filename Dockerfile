@@ -1,8 +1,12 @@
 FROM python:3.11-slim
 
-# System deps for OCR/PDF and OpenCV
-RUN apt-get update && \
+# Install Chrome, Chromedriver, and system deps for OCR/PDF/OpenCV
+RUN apt-get update && apt-get install -y wget gnupg unzip --no-install-recommends && \
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
+        google-chrome-stable \
         tesseract-ocr \
         poppler-utils \
         libglib2.0-0 \

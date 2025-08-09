@@ -21,3 +21,4 @@ ENV PYTHONUNBUFFERED=1 PORT=8000
 
 # Import your app from main.py -> app
 CMD sh -c 'gunicorn -k gthread --threads 4 --timeout 180 --bind 0.0.0.0:${PORT:-8000} main:app'
+
